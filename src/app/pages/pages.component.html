@@ -3,40 +3,89 @@
 </div>
 <div class="fixed">
   <div class="container body">
-    <!-- Content here -->
-    <div class="content">
-      <p>1</p>
-      <p>2</p>
-      <p>3</p>
-      <p>4</p>
-      <p>5</p>
-      <p>6</p>
-      <p>7</p>
-      <p>8</p>
-      <p>9</p>
-      <p>10</p>
-      <p>1</p>
-      <p>2</p>
-      <p>3</p>
-      <p>4</p>
-      <p>5</p>
-      <p>6</p>
-      <p>7</p>
-      <p>8</p>
-      <p>9</p>
-      <p>10</p>
-      <p>1</p>
-      <p>2</p>
-      <p>3</p>
-      <p>4</p>
-      <p>5</p>
-      <p>6</p>
-      <p>7</p>
-      <p>8</p>
-      <p>9</p>
-      <p>10</p>
-
+    <div class="gray_tab_bar" [ngClass]="{'height_40': !expand}">
+      <div class="d-flex">
+        <h5 class="gray_tab_bar_title">注意事項</h5>
+        <div class="icon_btn" (click)="expand = !expand">
+          <i class="fas" [ngClass]="expand?'fa-angle-up':'fa-angle-down'"></i>
+        </div>
+      </div>
+      <div class="gray_tab_bar_header">
+        <h6>宗旨</h6>
+      </div>
+      <p>本平台(賽事分析同學會)預測是利用大數據分析中機器學習的方式，來預測出下一場的比賽勝率;</p>
+      <p>本平台是由一群愛好運動賽事的工程師所架構的，喜愛分析討論球賽，所以成立了這個以討論賽事性質的平台，大家一起來預測賽事吧！</p>
+      <div class="gray_tab_bar_header">
+        <h6>板規</h6>
+      </div>
+      <p>1. 本平台為匿名帳號發言，不可人生攻擊，經查屬實帳號停權</p>
+      <p>2. 本平台為分析賽事同好討論，不可留言任何形式的廣告，經查屬實帳號停權</p>
+      <p>3. 本平台為分析賽事僅供參考以及討論，切勿拿來賭博，小賭怡情 大賭傷身</p>
     </div>
+    <div class="alert alert-primary" role="alert">
+      <h4 class="text-center">2020/06/02 星期二</h4>
+      <div class="d-flex justify-content-around">
+        <div>
+          <h1>樂天</h1>
+          <h1>0.8%</h1>
+        </div>
+        <div>
+          <h1 class="text-center">ＶＳ</h1>
+          <button class="btn btn-info mt-2">此場勝率預測</button>
+        </div>
+        <div>
+          <h1>兄弟</h1>
+          <h1>0.5%</h1>
+        </div>
+      </div>
+    </div>
+    <div class="alert alert-dark d-flex justify-content-between" role="alert">
+      <div class="message_text">
+        討論區 ｜ 會員人數： 20245
+      </div>
+      <div>
+        <button type="button" class="btn btn-light btn-sm">登入</button>
+        <button type="button" class="btn btn-primary btn-sm">留言</button>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-header">
+        giant, 發布時間： 2020/6/28 16:50
+      </div>
+      <div class="card-body">
+        <h5 class="card-title">我覺得兄弟會屌打～</h5>
+      </div>
+    </div>
+    <p>1</p>
+    <p>2</p>
+    <p>3</p>
+    <p>4</p>
+    <p>5</p>
+    <p>6</p>
+    <p>7</p>
+    <p>8</p>
+    <p>9</p>
+    <p>10</p>
+    <p>1</p>
+    <p>2</p>
+    <p>3</p>
+    <p>4</p>
+    <p>5</p>
+    <p>6</p>
+    <p>7</p>
+    <p>8</p>
+    <p>9</p>
+    <p>10</p>
+    <p>1</p>
+    <p>2</p>
+    <p>3</p>
+    <p>4</p>
+    <p>5</p>
+    <p>6</p>
+    <p>7</p>
+    <p>8</p>
+    <p>9</p>
+    <p>10</p>
   </div>
 </div>
 <div class="footer"></div>
