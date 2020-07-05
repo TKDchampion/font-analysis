@@ -8,9 +8,13 @@ import { Component, OnInit } from '@angular/core';
 export class PagesComponent implements OnInit {
 
   expand = true;
+  pagesIndex = 0;
   constructor() { }
 
   ngOnInit() {
   }
 
+  goAnalysis() {
+    this.pagesIndex = 1;
+  }
 }
