@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { PagesService } from './pages.service';
 
 @Component({
   selector: 'app-pages',
@@ -9,9 +10,17 @@ export class PagesComponent implements OnInit {
 
   expand = true;
   pagesIndex = 0;
-  constructor() { }
+  playerList = [];
+  constructor(private pagesService: PagesService) { }
 
   ngOnInit() {
+    this.getPlayersList();
+  }
+
+  getPlayersList() {
+    this.pagesService.getPlayerList().subscribe((resp: any) => {
+      this.playerList = resp.list;
+    });
   }
 
   goAnalysis() {

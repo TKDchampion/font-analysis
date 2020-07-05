@@ -1,0 +1,17 @@
+import { Injectable } from '@angular/core';
+import { BaseService, HttpDefaultOptions } from 'ngx-startkit';
+import { HttpClient } from '@angular/common/http';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class PagesService extends BaseService {
+
+  constructor(http: HttpClient, options: HttpDefaultOptions) {
+    super(http, options);
+  }
+
+  getPlayerList() {
+    return this.get('v1/getPlayerList');
+  }
+}

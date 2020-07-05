@@ -29,9 +29,9 @@
         </div>
       </div>
       <div class="row">
-        <div class="col-3">
+        <div class="col-3" *ngFor="let player of playerList">
           <div class="alert alert-primary cursorP" role="alert" (click)="goAnalysis()">
-            兄弟
+            {{player.name}}
           </div>
         </div>
       </div>
