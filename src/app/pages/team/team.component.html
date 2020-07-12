@@ -1,0 +1,100 @@
+<div id="fixed-header-slide">
+  <div class="header"></div>
+</div>
+<div class="fixed">
+  <div class="container body">
+    <ng-container>
+      <div class="gray_tab_bar height_40">
+        <div class="d-flex">
+          <div class="ml-2">
+            <i class="fas fa-chevron-left cursorP" (click)="goBack()"></i>
+          </div>
+          <h5 class="gray_tab_bar_title">{{teamVsList.name}}</h5>
+        </div>
+      </div>
+      <div class="alert alert-primary" role="alert" *ngFor="let vsItem of teamVsList.vs">
+        <h4 class="text-center">2020/06/02 星期二</h4>
+        <div class="d-flex justify-content-around">
+          <div *ngIf="vsItem.place === '主'">
+            <h1>{{vsItem.name}}</h1>
+            <h1>{{vsItem.win}}</h1>
+          </div>
+          <div *ngIf="vsItem.place === '客'">
+            <h1>{{vsItem.myName}}</h1>
+            <h1>{{vsItem.myWin}}</h1>
+          </div>
+          <div>
+            <h1 class="text-center">ＶＳ</h1>
+            <button class="btn btn-info mt-2">此場勝率預測</button>
+          </div>
+          <div *ngIf="vsItem.place === '客'">
+            <h1>{{vsItem.name}}</h1>
+            <h1>{{vsItem.win}}</h1>
+          </div>
+          <div *ngIf="vsItem.place === '主'">
+            <h1>{{vsItem.myName}}</h1>
+            <h1>{{vsItem.myWin}}</h1>
+          </div>
+        </div>
+      </div>
+      <div class="alert alert-dark d-flex justify-content-between" role="alert">
+        <div class="message_text">
+          討論區 ｜ 會員人數： 20245
+        </div>
+        <div>
+          <button type="button" class="btn btn-light btn-sm">登入</button>
+          <button type="button" class="btn btn-primary btn-sm">留言</button>
+        </div>
+      </div>
+      <div class="card mb-2">
+        <div class="card-header">
+          giant, 發布時間： 2020/6/28 16:50
+        </div>
+        <div class="card-body">
+          <h5 class="card-title">我覺得兄弟會屌打～</h5>
+        </div>
+      </div>
+      <div class="card mb-2">
+        <div class="card-header">
+          giant, 發布時間： 2020/6/28 16:50
+        </div>
+        <div class="card-body">
+          <h5 class="card-title">我覺得兄弟會屌打～</h5>
+        </div>
+      </div>
+      <div class="card mb-2">
+        <div class="card-header">
+          giant, 發布時間： 2020/6/28 16:50
+        </div>
+        <div class="card-body">
+          <h5 class="card-title">我覺得兄弟會屌打～</h5>
+        </div>
+      </div>
+      <div class="card mb-2">
+        <div class="card-header">
+          giant, 發布時間： 2020/6/28 16:50
+        </div>
+        <div class="card-body">
+          <h5 class="card-title">我覺得兄弟會屌打～</h5>
+        </div>
+      </div>
+      <div class="card mb-2">
+        <div class="card-header">
+          giant, 發布時間： 2020/6/28 16:50
+        </div>
+        <div class="card-body">
+          <h5 class="card-title">我覺得兄弟會屌打～</h5>
+        </div>
+      </div>
+      <div class="card mb-2">
+        <div class="card-header">
+          giant, 發布時間： 2020/6/28 16:50
+        </div>
+        <div class="card-body">
+          <h5 class="card-title">我覺得兄弟會屌打～</h5>
+        </div>
+      </div>
+    </ng-container>
+  </div>
+</div>
+<div class="footer"></div>

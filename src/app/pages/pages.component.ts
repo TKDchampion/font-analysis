@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { PagesService } from './pages.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-pages',
@@ -9,9 +10,8 @@ import { PagesService } from './pages.service';
 export class PagesComponent implements OnInit {
 
   expand = true;
-  pagesIndex = 0;
   playerList = [];
-  constructor(private pagesService: PagesService) { }
+  constructor(private pagesService: PagesService, private router: Router) { }
 
   ngOnInit() {
     this.getPlayersList();
@@ -23,7 +23,7 @@ export class PagesComponent implements OnInit {
     });
   }
 
-  goAnalysis() {
-    this.pagesIndex = 1;
+  goAnalysis(player) {
+    this.router.navigate(['pages/team', { id: player.teamId }]);
   }
 }

@@ -10,7 +10,7 @@ export class AnalysisHttpDefaultOptions extends HttpDefaultOptions {
 }
 
 export class AnalysisJWTOptions extends JWTOptions {
-  key = 'taken';
+  key = 'token';
 }
 
 

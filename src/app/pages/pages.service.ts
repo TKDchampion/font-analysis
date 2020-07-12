@@ -14,4 +14,10 @@ export class PagesService extends BaseService {
   getPlayerList() {
     return this.get('v1/getPlayerList');
   }
+
+  getPlayerListId(obj: object) {
+    return this.get('v1/getPlayerListId', {
+      queryObject: obj
+    });
+  }
 }
