@@ -20,4 +20,10 @@ export class PagesService extends BaseService {
       queryObject: obj
     });
   }
+
+  login(obj: object) {
+    return this.post('v1/login', {
+      body: obj
+    });
+  }
 }
