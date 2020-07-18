@@ -5,6 +5,8 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NgxStartkitModule, HttpDefaultOptions, JWTOptions } from 'ngx-startkit';
 import { FormsModule } from '@angular/forms';
+import { NgxSpinnerModule } from 'ngx-spinner';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 export class AnalysisHttpDefaultOptions extends HttpDefaultOptions {
   baseApiURL = 'https://analysis-a7071.web.app/api/';
@@ -23,7 +25,9 @@ export class AnalysisJWTOptions extends JWTOptions {
     BrowserModule,
     AppRoutingModule,
     NgxStartkitModule,
-    FormsModule
+    FormsModule,
+    NgxSpinnerModule,
+    BrowserAnimationsModule
   ],
   providers: [{
     provide: HttpDefaultOptions,

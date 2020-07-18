@@ -3,40 +3,46 @@
 </div>
 <div class="fixed">
   <div class="container body">
+    <ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="medium" color="#fff" type="ball-clip-rotate-multiple"
+      [fullScreen]="true">
+    </ngx-spinner>
     <ng-container>
-      <div class="gray_tab_bar height_40">
-        <div class="d-flex">
-          <div class="ml-2">
-            <i class="fas fa-chevron-left cursorP" (click)="goBack()"></i>
-          </div>
-          <h5 class="gray_tab_bar_title">{{teamVsList.name}}</h5>
-        </div>
-      </div>
-      <div class="alert alert-primary" role="alert" *ngFor="let vsItem of teamVsList.vs">
-        <h4 class="text-center">{{vsItem.time}}</h4>
-        <div class="d-flex justify-content-around">
-          <div *ngIf="vsItem.place === '主'">
-            <h1>{{vsItem.name}}</h1>
-            <h1>{{vsItem.win}}</h1>
-          </div>
-          <div *ngIf="vsItem.place === '客'">
-            <h1>{{vsItem.myName}}</h1>
-            <h1>{{vsItem.myWin}}</h1>
-          </div>
-          <div>
-            <h1 class="text-center">ＶＳ</h1>
-            <button class="btn btn-info mt-2">此場勝率預測</button>
-          </div>
-          <div *ngIf="vsItem.place === '客'">
-            <h1>{{vsItem.name}}</h1>
-            <h1>{{vsItem.win}}</h1>
-          </div>
-          <div *ngIf="vsItem.place === '主'">
-            <h1>{{vsItem.myName}}</h1>
-            <h1>{{vsItem.myWin}}</h1>
+      <ng-container *ngIf="teamVsList">
+        <div class="gray_tab_bar height_40">
+          <div class="d-flex">
+            <div class="ml-2">
+              <i class="fas fa-chevron-left cursorP" (click)="goBack()"></i>
+            </div>
+            <h5 class="gray_tab_bar_title">{{teamVsList.name}}</h5>
           </div>
         </div>
-      </div>
+        <div class="alert alert-primary" role="alert" *ngFor="let vsItem of teamVsList.vs">
+          <h4 class="text-center">{{vsItem.time}}</h4>
+          <div class="d-flex justify-content-around">
+            <div *ngIf="vsItem.place === '主'">
+              <h1>{{vsItem.name}}</h1>
+              <h1>{{vsItem.win}}</h1>
+            </div>
+            <div *ngIf="vsItem.place === '客'">
+              <h1>{{vsItem.myName}}</h1>
+              <h1>{{vsItem.myWin}}</h1>
+            </div>
+            <div>
+              <h1 class="text-center">ＶＳ</h1>
+              <button class="btn btn-info mt-2" (click)="analysisBtn(teamVsList.teamId, vsItem)" [disabled]="!isLogin || vsItem.win">此場勝率預測</button>
+            </div>
+            <div *ngIf="vsItem.place === '客'">
+              <h1>{{vsItem.name}}</h1>
+              <h1>{{vsItem.win}}</h1>
+            </div>
+            <div *ngIf="vsItem.place === '主'">
+              <h1>{{vsItem.myName}}</h1>
+              <h1>{{vsItem.myWin}}</h1>
+            </div>
+          </div>
+        </div>
+      </ng-container>
+
       <div class="alert alert-dark d-flex justify-content-between" role="alert">
         <div class="message_text">
           討論區 ｜ 會員人數： 20245 ｜ 會員名稱： Giant

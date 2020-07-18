@@ -21,6 +21,12 @@ export class PagesService extends BaseService {
     });
   }
 
+  getPlayersListAnalysisId(obj: object) {
+    return this.get('v1/getPlayersListAnalysisId', {
+      queryObject: obj
+    });
+  }
+
   login(obj: object) {
     return this.post('v1/login', {
       body: obj

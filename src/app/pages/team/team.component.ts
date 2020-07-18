@@ -3,6 +3,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { PagesService } from '../pages.service';
 import { TeamVsInfo, TokenInfo } from './team.model';
 import { StorageService, JWTOptions } from 'ngx-startkit';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-team',
@@ -24,11 +25,14 @@ export class TeamComponent implements OnInit {
     private route: ActivatedRoute,
     private pagesService: PagesService,
     private storage: StorageService,
-    private option: JWTOptions
-  ) { }
+    private option: JWTOptions,
+    private spinner: NgxSpinnerService
+  ) {
+    this.teamId = this.route.snapshot.paramMap.get('id');
+  }
 
   ngOnInit() {
-    this.teamId = this.route.snapshot.paramMap.get('id');
+    this.spinner.show();
     this.getPlayerListId(this.teamId);
     this.isLogin = !!this.storage.get('token');
   }
@@ -43,6 +47,7 @@ export class TeamComponent implements OnInit {
   }
 
   loginBtn() {
+    this.spinner.show();
     const obj = {
       account: this.account,
       password: this.password
@@ -52,10 +57,10 @@ export class TeamComponent implements OnInit {
         this.storage.set(this.option.key, resp);
         this.popupLogin = false;
         this.isLogin = true;
-        alert('登入成功');
       } else {
         alert('登入失敗');
       }
+      this.spinner.hide();
     });
   }
 
@@ -70,11 +75,25 @@ export class TeamComponent implements OnInit {
   }
 
   getPlayerListId(id) {
+    this.spinner.show();
     this.pagesService.getPlayerListId({ id }).subscribe((resp: any) => {
       this.teamVsList = resp;
-      console.log(this.teamVsList);
-
+      this.spinner.hide();
     });
   }
 
+  analysisBtn(id, item) {
+    this.spinner.show();
+    this.pagesService.getPlayersListAnalysisId({ id }).subscribe((resp: any) => {
+      if (item.active) {
+        if (item.win || item.myWin) {
+          item.win = resp.win;
+          item.myWin = resp.myWin;
+        } else {
+          alert('預測資料還沒出來');
+        }
+      }
+      this.spinner.hide();
+    });
+  }
 }
