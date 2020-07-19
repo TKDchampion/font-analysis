@@ -4,6 +4,7 @@ import { PagesService } from '../pages.service';
 import { TeamVsInfo, TokenInfo } from './team.model';
 import { StorageService, JWTOptions } from 'ngx-startkit';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { formatDate } from '@angular/common';
 
 @Component({
   selector: 'app-team',
@@ -19,6 +20,7 @@ export class TeamComponent implements OnInit {
   password: string;
   account: string;
   isLogin = false;
+  bsValue: Date = new Date();
 
   constructor(
     private router: Router,
@@ -33,7 +35,7 @@ export class TeamComponent implements OnInit {
 
   ngOnInit() {
     this.spinner.show();
-    this.getPlayerListId(this.teamId);
+    this.getPlayerListId(this.teamId, this.formatterDate(this.bsValue));
     this.isLogin = !!this.storage.get('token');
   }
 
@@ -74,9 +76,13 @@ export class TeamComponent implements OnInit {
     this.popupMessages = !this.popupMessages;
   }
 
-  getPlayerListId(id) {
+  changeDate(event) {
+    this.getPlayerListId(this.teamId, this.formatterDate(event));
+  }
+
+  getPlayerListId(id, time) {
     this.spinner.show();
-    this.pagesService.getPlayerListId({ id }).subscribe((resp: any) => {
+    this.pagesService.getPlayerListId({ id, time }).subscribe((resp: any) => {
       this.teamVsList = resp;
       this.spinner.hide();
     });
@@ -95,5 +101,9 @@ export class TeamComponent implements OnInit {
       }
       this.spinner.hide();
     });
+  }
+
+  private formatterDate(time) {
+    return formatDate(time, 'yyyy/MM/dd', 'en');
   }
 }

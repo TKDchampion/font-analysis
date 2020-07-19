@@ -6,6 +6,7 @@ import { PagesComponent } from './pages.component';
 import { TeamComponent } from './team/team.component';
 import { FormsModule } from '@angular/forms';
 import { NgxSpinnerModule } from 'ngx-spinner';
+import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 
 
 @NgModule({
@@ -14,7 +15,8 @@ import { NgxSpinnerModule } from 'ngx-spinner';
     CommonModule,
     PagesRoutingModule,
     FormsModule,
-    NgxSpinnerModule
+    NgxSpinnerModule,
+    BsDatepickerModule.forRoot()
   ]
 })
 export class PagesModule { }

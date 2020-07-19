@@ -27,7 +27,7 @@ export class AnalysisJWTOptions extends JWTOptions {
     NgxStartkitModule,
     FormsModule,
     NgxSpinnerModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
   ],
   providers: [{
     provide: HttpDefaultOptions,

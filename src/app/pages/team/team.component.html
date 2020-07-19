@@ -16,6 +16,12 @@
             <h5 class="gray_tab_bar_title">{{teamVsList.name}}</h5>
           </div>
         </div>
+        <div class="row">
+          <div class="col-12 form-group">
+            <input type="button" class="form-control" #dp="bsDatepicker" bsDatepicker [ngModel]="bsValue" (ngModelChange)="changeDate($event)">
+            <i class="fas fa-caret-down icon_down" (click)="dp.toggle()"></i>
+          </div>
+        </div>
         <div class="alert alert-primary" role="alert" *ngFor="let vsItem of teamVsList.vs">
           <h4 class="text-center">{{vsItem.time}}</h4>
           <div class="d-flex justify-content-around">
@@ -29,7 +35,8 @@
             </div>
             <div>
               <h1 class="text-center">ＶＳ</h1>
-              <button class="btn btn-info mt-2" (click)="analysisBtn(teamVsList.teamId, vsItem)" [disabled]="!isLogin || vsItem.win">此場勝率預測</button>
+              <button class="btn btn-info mt-2" (click)="analysisBtn(teamVsList.teamId, vsItem)"
+                [disabled]="!isLogin || vsItem.win">此場勝率預測</button>
             </div>
             <div *ngIf="vsItem.place === '客'">
               <h1>{{vsItem.name}}</h1>
@@ -45,7 +52,7 @@
 
       <div class="alert alert-dark d-flex justify-content-between" role="alert">
         <div class="message_text">
-          討論區 ｜ 會員人數： 20245 ｜ 會員名稱： Giant
+          討論區 ｜ 會員人數： 20245 ｜ 會員名稱： Giant ｜ 剩餘預測次數： ４
         </div>
         <div>
           <button type="button" class="btn btn-warning btn-sm" (click)="login()" *ngIf="!isLogin">登入</button>
