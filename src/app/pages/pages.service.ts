@@ -22,8 +22,8 @@ export class PagesService extends BaseService {
   }
 
   getPlayersListAnalysisId(obj: object) {
-    return this.get('v1/getPlayersListAnalysisId', {
-      queryObject: obj
+    return this.post('v1/getPlayersListAnalysisId', {
+      body: obj
     });
   }
 

@@ -20,6 +20,7 @@ export class TeamComponent implements OnInit {
   password: string;
   account: string;
   isLogin = false;
+  tokenContain: any;
   bsValue: Date = new Date();
 
   constructor(
@@ -37,6 +38,8 @@ export class TeamComponent implements OnInit {
     this.spinner.show();
     this.getPlayerListId(this.teamId, this.formatterDate(this.bsValue));
     this.isLogin = !!this.storage.get('token');
+    this.tokenContain = this.storage.get('token');
+
   }
 
   goBack() {
@@ -90,9 +93,16 @@ export class TeamComponent implements OnInit {
 
   analysisBtn(id, item) {
     this.spinner.show();
-    this.pagesService.getPlayersListAnalysisId({ id }).subscribe((resp: any) => {
+    const obj = {
+      id,
+      account: this.tokenContain.account,
+      time: item.time,
+      vsId: item.vsId
+    };
+
+    this.pagesService.getPlayersListAnalysisId(obj).subscribe((resp: any) => {
       if (item.active) {
-        if (item.win || item.myWin) {
+        if (resp.win && resp.myWin) {
           item.win = resp.win;
           item.myWin = resp.myWin;
         } else {

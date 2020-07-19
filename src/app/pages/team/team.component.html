@@ -18,7 +18,7 @@
         </div>
         <div class="row">
           <div class="col-12 form-group">
-            <input type="button" class="form-control" #dp="bsDatepicker" bsDatepicker [ngModel]="bsValue" (ngModelChange)="changeDate($event)">
+            <input type="button" class="form-control" #dp="bsDatepicker" bsDatepicker [ngModel]="bsValue" [maxDate]="bsValue" (ngModelChange)="changeDate($event)">
             <i class="fas fa-caret-down icon_down" (click)="dp.toggle()"></i>
           </div>
         </div>
@@ -52,7 +52,7 @@
 
       <div class="alert alert-dark d-flex justify-content-between" role="alert">
         <div class="message_text">
-          討論區 ｜ 會員人數： 20245 ｜ 會員名稱： Giant ｜ 剩餘預測次數： ４
+          討論區 ｜ 會員人數： 20245 ｜ 會員名稱： {{tokenContain.account}} ｜ 剩餘預測次數： {{tokenContain.counts}}
         </div>
         <div>
           <button type="button" class="btn btn-warning btn-sm" (click)="login()" *ngIf="!isLogin">登入</button>
