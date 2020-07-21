@@ -38,7 +38,7 @@ export class TeamComponent implements OnInit {
     this.spinner.show();
     this.getPlayerListId(this.teamId, this.formatterDate(this.bsValue));
     this.isLogin = !!this.storage.get('token');
-    this.tokenContain = this.storage.get('token');
+    this.tokenContain = this.isLogin ? this.storage.get('token') : '';
 
   }
 
