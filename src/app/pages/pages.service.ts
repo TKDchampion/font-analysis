@@ -32,4 +32,10 @@ export class PagesService extends BaseService {
       body: obj
     });
   }
+
+  getPlayerMessagesId(obj: object) {
+    return this.get('v1/getPlayerMessagesId', {
+      queryObject: obj
+    });
+  }
 }

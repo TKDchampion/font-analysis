@@ -18,7 +18,8 @@
         </div>
         <div class="row">
           <div class="col-12 form-group">
-            <input type="button" class="form-control" #dp="bsDatepicker" bsDatepicker [ngModel]="bsValue" [maxDate]="bsValue" (ngModelChange)="changeDate($event)">
+            <input type="button" class="form-control" #dp="bsDatepicker" bsDatepicker [ngModel]="bsValue"
+              [maxDate]="bsValue" (ngModelChange)="changeDate($event)">
             <i class="fas fa-caret-down icon_down" (click)="dp.toggle()"></i>
           </div>
         </div>
@@ -96,56 +97,34 @@
         </div>
       </div>
 
-      <div class="card mb-2">
+      <div class="card mb-2" *ngFor="let messageItem of messagesList">
         <div class="card-header">
-          giant, 發布時間： 2020/6/28 16:50
+          {{messageItem.author}}, 發布時間： {{messageItem.time}}
         </div>
         <div class="card-body">
-          <h5 class="card-title">我覺得兄弟會屌打～</h5>
-        </div>
-      </div>
-      <div class="card mb-2">
-        <div class="card-header">
-          giant, 發布時間： 2020/6/28 16:50
-        </div>
-        <div class="card-body">
-          <h5 class="card-title">我覺得兄弟會屌打～</h5>
-        </div>
-      </div>
-      <div class="card mb-2">
-        <div class="card-header">
-          giant, 發布時間： 2020/6/28 16:50
-        </div>
-        <div class="card-body">
-          <h5 class="card-title">我覺得兄弟會屌打～</h5>
-        </div>
-      </div>
-      <div class="card mb-2">
-        <div class="card-header">
-          giant, 發布時間： 2020/6/28 16:50
-        </div>
-        <div class="card-body">
-          <h5 class="card-title">我覺得兄弟會屌打～</h5>
-        </div>
-      </div>
-      <div class="card mb-2">
-        <div class="card-header">
-          giant, 發布時間： 2020/6/28 16:50
-        </div>
-        <div class="card-body">
-          <h5 class="card-title">我覺得兄弟會屌打～</h5>
-        </div>
-      </div>
-      <div class="card mb-2">
-        <div class="card-header">
-          giant, 發布時間： 2020/6/28 16:50
-        </div>
-        <div class="card-body">
-          <h5 class="card-title">我覺得兄弟會屌打～</h5>
+          <h5 class="card-title mb-4">{{messageItem.content}}</h5>
+          <div class="text-right">
+            <span class="message_reply＿tittle_btn" (click)="openReply()">回覆({{messageItem.reply.length}})</span>
+          </div>
+          <ng-container *ngIf="isReply">
+            <div class="card message_reply＿tittle_bg message_reply">
+              <div class="message_reply＿tittle">
+                <div>更多回覆</div>
+              </div>
+            </div>
+            <div class="card message_reply＿tittle_bg message_reply" *ngFor="let replyItem of messageItem.reply">
+              <div class="card-body">
+                <h5 class="card-title">{{replyItem.name}}</h5>
+                <p class="card-text mb-0">{{replyItem.content}}</p>
+                <div class="text-right">
+                  <span>{{replyItem.time}}</span>
+                </div>
+              </div>
+            </div>
+          </ng-container>
         </div>
       </div>
     </ng-container>
-
 
   </div>
 </div>

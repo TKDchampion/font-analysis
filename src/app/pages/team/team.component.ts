@@ -5,6 +5,7 @@ import { TeamVsInfo, TokenInfo } from './team.model';
 import { StorageService, JWTOptions } from 'ngx-startkit';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { formatDate } from '@angular/common';
+import { forkJoin } from 'rxjs';
 
 @Component({
   selector: 'app-team',
@@ -22,6 +23,8 @@ export class TeamComponent implements OnInit {
   isLogin = false;
   tokenContain: any;
   bsValue: Date = new Date();
+  messagesList: any;
+  isReply = false;
 
   constructor(
     private router: Router,
@@ -35,11 +38,17 @@ export class TeamComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.spinner.show();
-    this.getPlayerListId(this.teamId, this.formatterDate(this.bsValue));
+    this.init();
     this.isLogin = !!this.storage.get('token');
     this.tokenContain = this.isLogin ? this.storage.get('token') : '';
+  }
 
+  init() {
+    this.spinner.show();
+    this.pagesService.getPlayerListId({ id: this.teamId, time: this.formatterDate(this.bsValue) }).subscribe((resp: any) => {
+      this.teamVsList = resp;
+      this.getPlayerMessagesId(this.teamId);
+    });
   }
 
   goBack() {
@@ -73,6 +82,9 @@ export class TeamComponent implements OnInit {
     this.storage.clear();
     this.goBack();
   }
+  openReply() {
+    this.isReply = !this.isReply;
+  }
 
   messages() {
     this.popupLogin = false;
@@ -87,6 +99,15 @@ export class TeamComponent implements OnInit {
     this.spinner.show();
     this.pagesService.getPlayerListId({ id, time }).subscribe((resp: any) => {
       this.teamVsList = resp;
+      this.spinner.hide();
+    });
+  }
+
+  getPlayerMessagesId(id) {
+    this.spinner.show();
+    this.pagesService.getPlayerMessagesId({ id }).subscribe((resp: any) => {
+      this.messagesList = resp.messageContent;
+      console.log(resp);
       this.spinner.hide();
     });
   }
@@ -106,7 +127,7 @@ export class TeamComponent implements OnInit {
           item.win = resp.win;
           item.myWin = resp.myWin;
         } else {
-          alert('預測資料還沒出來');
+          alert('預測資料還沒出來或是你沒有權限');
         }
       }
       this.spinner.hide();
