@@ -104,7 +104,7 @@
         <div class="card-body">
           <h5 class="card-title mb-4">{{messageItem.content}}</h5>
           <div class="text-right">
-            <span class="message_reply＿tittle_btn" (click)="openReply()">回覆({{messageItem.reply.length}})</span>
+            <span class="message_reply＿tittle_btn" (click)="openReply(messageItem)">回覆({{messageItem.replyConuts}})</span>
           </div>
           <ng-container *ngIf="isReply">
             <div class="card message_reply＿tittle_bg message_reply">
@@ -114,11 +114,17 @@
             </div>
             <div class="card message_reply＿tittle_bg message_reply" *ngFor="let replyItem of messageItem.reply">
               <div class="card-body">
-                <h5 class="card-title">{{replyItem.name}}</h5>
+                <h5 class="card-title">{{replyItem.author}}</h5>
                 <p class="card-text mb-0">{{replyItem.content}}</p>
                 <div class="text-right">
                   <span>{{replyItem.time}}</span>
                 </div>
+              </div>
+            </div>
+            <div class="card message_reply＿tittle_bg message_reply" *ngIf="isLogin">
+              <div class="message_reply＿tittle d-flex">
+                <textarea class="message_reply＿tittle_text_box">輸入你想要寫的內容...</textarea>
+                <button>送出</button>
               </div>
             </div>
           </ng-container>

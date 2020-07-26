@@ -38,4 +38,10 @@ export class PagesService extends BaseService {
       queryObject: obj
     });
   }
+
+  getPlayerMessagesReplyId(obj: object) {
+    return this.get('v1/getPlayerMessagesReplyId', {
+      queryObject: obj
+    });
+  }
 }

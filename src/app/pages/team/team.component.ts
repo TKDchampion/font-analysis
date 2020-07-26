@@ -82,8 +82,17 @@ export class TeamComponent implements OnInit {
     this.storage.clear();
     this.goBack();
   }
-  openReply() {
-    this.isReply = !this.isReply;
+  openReply(replyItem) {
+    if (!this.isReply) {
+      this.spinner.show();
+      this.pagesService.getPlayerMessagesReplyId({ id: replyItem.replyId }).subscribe(resp => {
+        this.isReply = true;
+        replyItem.reply = resp;
+        this.spinner.hide();
+      });
+    } else {
+      this.isReply = false;
+    }
   }
 
   messages() {
@@ -106,8 +115,7 @@ export class TeamComponent implements OnInit {
   getPlayerMessagesId(id) {
     this.spinner.show();
     this.pagesService.getPlayerMessagesId({ id }).subscribe((resp: any) => {
-      this.messagesList = resp.messageContent;
-      console.log(resp);
+      this.messagesList = resp;
       this.spinner.hide();
     });
   }
