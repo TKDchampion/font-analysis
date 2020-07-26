@@ -24,7 +24,7 @@ export class TeamComponent implements OnInit {
   tokenContain: any;
   bsValue: Date = new Date();
   messagesList: any;
-  isReply = false;
+  messagesText: string;
 
   constructor(
     private router: Router,
@@ -71,6 +71,7 @@ export class TeamComponent implements OnInit {
         this.storage.set(this.option.key, resp);
         this.popupLogin = false;
         this.isLogin = true;
+        this.tokenContain = this.storage.get('token');
       } else {
         alert('登入失敗');
       }
@@ -82,22 +83,37 @@ export class TeamComponent implements OnInit {
     this.storage.clear();
     this.goBack();
   }
+
   openReply(replyItem) {
-    if (!this.isReply) {
+    if (!replyItem.isReply) {
       this.spinner.show();
       this.pagesService.getPlayerMessagesReplyId({ id: replyItem.replyId }).subscribe(resp => {
-        this.isReply = true;
+        replyItem.isReply = true;
         replyItem.reply = resp;
         this.spinner.hide();
       });
     } else {
-      this.isReply = false;
+      replyItem.isReply = false;
     }
   }
 
   messages() {
     this.popupLogin = false;
     this.popupMessages = !this.popupMessages;
+  }
+
+  messagesSumit() {
+    this.spinner.show();
+    const obj = {
+      author: this.tokenContain.account,
+      content: this.messagesText,
+      replyId: this.generatorId(),
+      time: this.formatterDate(new Date(), true),
+      userId: this.tokenContain.userId
+    };
+    this.pagesService.putPlayerMessages(this.teamId, obj).subscribe(resp => {
+      this.getPlayerMessagesId(this.teamId);
+    });
   }
 
   changeDate(event) {
@@ -116,6 +132,7 @@ export class TeamComponent implements OnInit {
     this.spinner.show();
     this.pagesService.getPlayerMessagesId({ id }).subscribe((resp: any) => {
       this.messagesList = resp;
+      this.popupMessages = false;
       this.spinner.hide();
     });
   }
@@ -142,7 +159,11 @@ export class TeamComponent implements OnInit {
     });
   }
 
-  private formatterDate(time) {
-    return formatDate(time, 'yyyy/MM/dd', 'en');
+  private formatterDate(time, detail = false) {
+    return detail ? formatDate(time, 'yyyy/MM/dd HH:mm', 'en') : formatDate(time, 'yyyy/MM/dd', 'en');
+  }
+
+  private generatorId() {
+    return Math.random().toString(36).substr(2, 7) + Date.now().toString(36).substr(4, 9);
   }
 }

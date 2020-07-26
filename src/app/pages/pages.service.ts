@@ -44,4 +44,10 @@ export class PagesService extends BaseService {
       queryObject: obj
     });
   }
+
+  putPlayerMessages(teamId: string, obj: object) {
+    return this.put(`v1/putPlayerMessages?teamId=${teamId}`, {
+      body: obj
+    });
+  }
 }

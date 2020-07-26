@@ -87,11 +87,11 @@
           <div class="card-header">留言</div>
           <div class="card-body text-primary">
             <h5 class="card-title">
-              <textarea class="text_box">輸入你想要寫的內容...</textarea>
+              <textarea class="text_box" [(ngModel)]="messagesText" placeholder="輸入你想要寫的內容..."></textarea>
             </h5>
           </div>
           <div class="d-flex btn_group">
-            <button type="button" class="btn btn-primary mr-2">確定</button>
+            <button type="button" class="btn btn-primary mr-2" (click)="messagesSumit()">確定</button>
             <button type="button" class="btn btn-secondary ml-2">取消</button>
           </div>
         </div>
@@ -106,7 +106,7 @@
           <div class="text-right">
             <span class="message_reply＿tittle_btn" (click)="openReply(messageItem)">回覆({{messageItem.replyConuts}})</span>
           </div>
-          <ng-container *ngIf="isReply">
+          <ng-container *ngIf="messageItem.isReply">
             <div class="card message_reply＿tittle_bg message_reply">
               <div class="message_reply＿tittle">
                 <div>更多回覆</div>
