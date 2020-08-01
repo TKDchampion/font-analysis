@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { PagesService } from './pages.service';
 import { Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { StorageService } from 'ngx-startkit';
 
 @Component({
   selector: 'app-pages',
@@ -15,7 +16,8 @@ export class PagesComponent implements OnInit {
   constructor(
     private pagesService: PagesService,
     private router: Router,
-    private spinner: NgxSpinnerService) { }
+    private spinner: NgxSpinnerService,
+    private storage: StorageService) { }
 
   ngOnInit() {
     this.getPlayersList();
@@ -31,5 +33,6 @@ export class PagesComponent implements OnInit {
 
   goAnalysis(player) {
     this.router.navigate(['pages/team', { id: player.teamId }]);
+    this.storage.set('team', player);
   }
 }

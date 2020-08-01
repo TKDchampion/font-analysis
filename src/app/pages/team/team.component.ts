@@ -25,6 +25,7 @@ export class TeamComponent implements OnInit {
   bsValue: Date = new Date();
   messagesList: any;
   messagesText: string;
+  team: any;
 
   constructor(
     private router: Router,
@@ -41,6 +42,9 @@ export class TeamComponent implements OnInit {
     this.init();
     this.isLogin = !!this.storage.get('token');
     this.tokenContain = this.isLogin ? this.storage.get('token') : '';
+    this.team = this.storage.get('team');
+    console.log(this.team);
+
   }
 
   init() {
@@ -143,14 +147,14 @@ export class TeamComponent implements OnInit {
       id,
       account: this.tokenContain.account,
       time: item.time,
-      vsId: item.vsId
+      game_id: item.game_id
     };
 
     this.pagesService.getPlayersListAnalysisId(obj).subscribe((resp: any) => {
       if (item.active) {
-        if (resp.win && resp.myWin) {
-          item.win = resp.win;
-          item.myWin = resp.myWin;
+        if (resp.team1_winRate && resp.team2_winRate) {
+          item.team1_winRate = resp.team1_winRate;
+          item.team2_winRate = resp.team2_winRate;
         } else {
           alert('預測資料還沒出來或是你沒有權限');
         }

@@ -13,7 +13,7 @@
             <div class="ml-2">
               <i class="fas fa-chevron-left cursorP" (click)="goBack()"></i>
             </div>
-            <h5 class="gray_tab_bar_title">{{teamVsList.name}}</h5>
+            <h5 class="gray_tab_bar_title">{{team.name}}</h5>
           </div>
         </div>
         <div class="row">
@@ -23,29 +23,21 @@
             <i class="fas fa-caret-down icon_down" (click)="dp.toggle()"></i>
           </div>
         </div>
-        <div class="alert alert-primary" role="alert" *ngFor="let vsItem of teamVsList.vs">
+        <div class="alert alert-primary" role="alert" *ngFor="let vsItem of teamVsList">
           <h4 class="text-center">{{vsItem.time}}</h4>
           <div class="d-flex justify-content-around">
-            <div *ngIf="vsItem.place === '主'">
-              <h1>{{vsItem.name}}</h1>
-              <h1>{{vsItem.win}}</h1>
-            </div>
-            <div *ngIf="vsItem.place === '客'">
-              <h1>{{vsItem.myName}}</h1>
-              <h1>{{vsItem.myWin}}</h1>
+            <div>
+              <h1>{{vsItem.team1}}</h1>
+              <h1>{{vsItem.team1_winRate}}</h1>
             </div>
             <div>
               <h1 class="text-center">ＶＳ</h1>
-              <button class="btn btn-info mt-2" (click)="analysisBtn(teamVsList.teamId, vsItem)"
+              <button class="btn btn-info mt-2" (click)="analysisBtn(team.teamId, vsItem)"
                 [disabled]="!isLogin || vsItem.win">此場勝率預測</button>
             </div>
-            <div *ngIf="vsItem.place === '客'">
-              <h1>{{vsItem.name}}</h1>
-              <h1>{{vsItem.win}}</h1>
-            </div>
-            <div *ngIf="vsItem.place === '主'">
-              <h1>{{vsItem.myName}}</h1>
-              <h1>{{vsItem.myWin}}</h1>
+            <div>
+              <h1>{{vsItem.team2}}</h1>
+              <h1>{{vsItem.team2_winRate}}</h1>
             </div>
           </div>
         </div>
