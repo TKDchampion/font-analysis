@@ -56,4 +56,16 @@ export class PagesService extends BaseService {
       body: obj
     });
   }
+
+  putPlayerReply(replyId: string, obj: object) {
+    return this.put(`v1/putPlayerReply?replyId=${replyId}`, {
+      body: obj
+    });
+  }
+
+  deletePlayerReply(replyId: string, obj: object) {
+    return this.put(`v1/deletePlayerReply?replyId=${replyId}`, {
+      body: obj
+    });
+  }
 }

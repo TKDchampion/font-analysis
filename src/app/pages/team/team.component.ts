@@ -26,6 +26,7 @@ export class TeamComponent implements OnInit {
   messagesList: any;
   messagesText: string;
   team: any;
+  replyText: string;
 
   constructor(
     private router: Router,
@@ -168,7 +169,36 @@ export class TeamComponent implements OnInit {
     delete item.replyConuts;
     this.pagesService.deletePlayerMessages(this.teamId, item).subscribe(resp => {
       this.getPlayerMessagesId(this.teamId);
-     });
+    });
+  }
+
+  replySubmit(item) {
+    const obj = {
+      author: this.tokenContain.account,
+      content: this.replyText,
+      time: this.formatterDate(new Date(), true),
+      userId: this.tokenContain.userId
+    };
+    this.spinner.show();
+    this.pagesService.putPlayerReply(item.replyId, obj).subscribe(resp => {
+      this.pagesService.getPlayerMessagesReplyId({ id: item.replyId }).subscribe(res => {
+        item.isReply = true;
+        item.reply = res;
+        this.replyText = '';
+        this.spinner.hide();
+      });
+    });
+  }
+
+  deleteReply(replyItem, item) {
+    this.spinner.show();
+    this.pagesService.deletePlayerReply(item.replyId, replyItem).subscribe(resp => {
+      this.pagesService.getPlayerMessagesReplyId({ id: item.replyId }).subscribe(res => {
+        item.isReply = true;
+        item.reply = res;
+        this.spinner.hide();
+      });
+    });
   }
 
   private formatterDate(time, detail = false) {

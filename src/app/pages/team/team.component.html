@@ -112,7 +112,14 @@
             </div>
             <div class="card message_reply＿tittle_bg message_reply" *ngFor="let replyItem of messageItem.reply">
               <div class="card-body">
-                <h5 class="card-title">{{replyItem.author}}</h5>
+                <h5 class="card-title d-flex justify-content-between">
+                  <div>
+                    {{replyItem.author}}
+                  </div>
+                  <div *ngIf="tokenContain.account === replyItem.author">
+                    <button type="button" class="btn btn-danger btn-sm" (click)="deleteReply(replyItem, messageItem)">刪除</button>
+                  </div>
+                </h5>
                 <p class="card-text mb-0">{{replyItem.content}}</p>
                 <div class="text-right">
                   <span>{{replyItem.time}}</span>
@@ -121,8 +128,9 @@
             </div>
             <div class="card message_reply＿tittle_bg message_reply" *ngIf="isLogin">
               <div class="message_reply＿tittle d-flex">
-                <textarea class="message_reply＿tittle_text_box">輸入你想要寫的內容...</textarea>
-                <button>送出</button>
+                <textarea class="message_reply＿tittle_text_box" [(ngModel)]="replyText"
+                  placeholder="輸入你想要寫的內容..."></textarea>
+                <button (click)="replySubmit(messageItem)">送出</button>
               </div>
             </div>
           </ng-container>
