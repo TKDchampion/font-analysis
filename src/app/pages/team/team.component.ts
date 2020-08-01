@@ -163,6 +163,14 @@ export class TeamComponent implements OnInit {
     });
   }
 
+  deleteMessage(item) {
+    this.spinner.show();
+    delete item.replyConuts;
+    this.pagesService.deletePlayerMessages(this.teamId, item).subscribe(resp => {
+      this.getPlayerMessagesId(this.teamId);
+     });
+  }
+
   private formatterDate(time, detail = false) {
     return detail ? formatDate(time, 'yyyy/MM/dd HH:mm', 'en') : formatDate(time, 'yyyy/MM/dd', 'en');
   }

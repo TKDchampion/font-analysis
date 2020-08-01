@@ -50,4 +50,10 @@ export class PagesService extends BaseService {
       body: obj
     });
   }
+
+  deletePlayerMessages(teamId: string, obj: object) {
+    return this.put(`v1/deletePlayerMessages?teamId=${teamId}`, {
+      body: obj
+    });
+  }
 }

@@ -90,13 +90,19 @@
       </div>
 
       <div class="card mb-2" *ngFor="let messageItem of messagesList">
-        <div class="card-header">
-          {{messageItem.author}}, 發布時間： {{messageItem.time}}
+        <div class="card-header d-flex justify-content-between">
+          <div class="header_txt">
+            {{messageItem.author}}, 發布時間： {{messageItem.time}}
+          </div>
+          <div *ngIf="tokenContain.account === messageItem.author">
+            <button type="button" class="btn btn-danger btn-sm" (click)="deleteMessage(messageItem)">刪除</button>
+          </div>
         </div>
         <div class="card-body">
           <h5 class="card-title mb-4">{{messageItem.content}}</h5>
           <div class="text-right">
-            <span class="message_reply＿tittle_btn" (click)="openReply(messageItem)">回覆({{messageItem.replyConuts}})</span>
+            <span class="message_reply＿tittle_btn"
+              (click)="openReply(messageItem)">回覆({{messageItem.replyConuts}})</span>
           </div>
           <ng-container *ngIf="messageItem.isReply">
             <div class="card message_reply＿tittle_bg message_reply">
