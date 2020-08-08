@@ -45,7 +45,7 @@
 
       <div class="alert alert-dark d-flex justify-content-between" role="alert">
         <div class="message_text">
-          討論區 ｜ 會員人數： 20245 ｜ 會員名稱： {{tokenContain.account}} ｜ 剩餘預測次數：
+          討論區 ｜ 會員人數： 20245 ｜ 會員名稱： {{tokenContain.account}} ｜ 剩餘預測次數：{{counts}}
         </div>
         <div>
           <button type="button" class="btn btn-warning btn-sm" (click)="login()" *ngIf="!isLogin">登入</button>
@@ -60,16 +60,16 @@
           <div class="card-header">登入</div>
           <div class="card-body text-primary">
             <h5 class="card-title">帳號
-              <input type="text" class="form-control" placeholder="請輸入帳號" [(ngModel)]="account">
+              <input type="text" class="form-control" placeholder="請輸入帳號" [(ngModel)]="account" (keyup.enter)="loginBtn()">
             </h5>
             <h5 class="card-title">密碼
-              <input type="text" class="form-control" placeholder="請輸入密碼" [(ngModel)]="password">
+              <input type="password" class="form-control" placeholder="請輸入密碼" [(ngModel)]="password" (keyup.enter)="loginBtn()">
             </h5>
           </div>
           <div class="d-flex btn_group">
             <button type="button" class="btn btn-primary" (click)="loginBtn()">登入</button>
-            <button type="button" class="btn btn-warning ml-2 mr-2">註冊</button>
-            <button type="button" class="btn btn-secondary">取消</button>
+            <button type="button" class="btn btn-warning ml-2 mr-2" (click)="singin()">註冊</button>
+            <button type="button" class="btn btn-secondary" (click)="cancel()">取消</button>
           </div>
         </div>
       </div>

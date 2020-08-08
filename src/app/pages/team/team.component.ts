@@ -27,6 +27,7 @@ export class TeamComponent implements OnInit {
   messagesText: string;
   team: any;
   replyText: string;
+  counts = 0;
 
   constructor(
     private router: Router,
@@ -44,8 +45,7 @@ export class TeamComponent implements OnInit {
     this.isLogin = !!this.storage.get('token');
     this.tokenContain = this.isLogin ? this.storage.get('token') : '';
     this.team = this.storage.get('team');
-    console.log(this.team);
-
+    this.getUser();
   }
 
   init() {
@@ -56,6 +56,12 @@ export class TeamComponent implements OnInit {
     });
   }
 
+  getUser() {
+    this.pagesService.getUserCounts({ userId: this.tokenContain.userId }).subscribe((resp: any) => {
+      this.counts = resp.counts;
+    });
+  }
+
   goBack() {
     this.router.navigateByUrl('/pages');
   }
@@ -63,6 +69,27 @@ export class TeamComponent implements OnInit {
   login() {
     this.popupLogin = !this.popupLogin;
     this.popupMessages = false;
+  }
+
+  singin() {
+    this.spinner.show();
+    const obj = {
+      account: this.account,
+      password: this.password
+    };
+    this.pagesService.singin(obj).subscribe((resp: TokenInfo) => {
+      alert('註冊成功');
+      this.spinner.hide();
+    }, error => {
+      alert('註冊失敗');
+      this.spinner.hide();
+    });
+  }
+
+  cancel() {
+    this.account = '';
+    this.password = '';
+    this.popupLogin = false;
   }
 
   loginBtn() {
@@ -157,7 +184,7 @@ export class TeamComponent implements OnInit {
           item.team1_winRate = resp.team1_winRate;
           item.team2_winRate = resp.team2_winRate;
         } else {
-          alert('預測資料還沒出來或是你沒有權限');
+          alert('預測資料還沒出來或是你沒權限跟足夠的次數');
         }
       }
       this.spinner.hide();

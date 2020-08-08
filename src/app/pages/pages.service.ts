@@ -27,8 +27,20 @@ export class PagesService extends BaseService {
     });
   }
 
+  getUserCounts(id: object) {
+    return this.get('v1/getUserCounts', {
+      queryObject: id
+    });
+  }
+
   login(obj: object) {
     return this.post('v1/login', {
+      body: obj
+    });
+  }
+
+  singin(obj: object) {
+    return this.post('v1/singin', {
       body: obj
     });
   }
