@@ -178,7 +178,7 @@ export class TeamComponent implements OnInit {
       game_id: item.game_id
     };
 
-    this.pagesService.getPlayersListAnalysisId(obj).subscribe((resp: any) => {
+    this.pagesService.getPlayerListAnalysisId(obj).subscribe((resp: any) => {
       if (item.active) {
         if (resp.team1_winRate && resp.team2_winRate) {
           item.team1_winRate = resp.team1_winRate;
@@ -187,6 +187,7 @@ export class TeamComponent implements OnInit {
           alert('預測資料還沒出來或是你沒權限跟足夠的次數');
         }
       }
+      this.getUser();
       this.spinner.hide();
     });
   }

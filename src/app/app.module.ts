@@ -9,7 +9,7 @@ import { NgxSpinnerModule } from 'ngx-spinner';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 export class AnalysisHttpDefaultOptions extends HttpDefaultOptions {
-  baseApiURL = 'https://analysis-a7071.web.app/api/';
+  baseApiURL = 'https://analysis-dacd9.web.app/api/';
 }
 
 export class AnalysisJWTOptions extends JWTOptions {
