@@ -18,6 +18,7 @@ export class TeamComponent implements OnInit {
   teamVsList: TeamVsInfo;
   popupLogin = false;
   popupMessages = false;
+  popupDescription = false;
   password: string;
   account: string;
   isLogin = false;
@@ -69,6 +70,7 @@ export class TeamComponent implements OnInit {
   login() {
     this.popupLogin = !this.popupLogin;
     this.popupMessages = false;
+    this.popupDescription = false;
   }
 
   singin() {
@@ -107,6 +109,7 @@ export class TeamComponent implements OnInit {
       } else {
         alert('登入失敗');
       }
+      this.getUser();
       this.spinner.hide();
     });
   }
@@ -131,7 +134,14 @@ export class TeamComponent implements OnInit {
 
   messages() {
     this.popupLogin = false;
+    this.popupDescription = false;
     this.popupMessages = !this.popupMessages;
+  }
+
+  description() {
+    this.popupLogin = false;
+    this.popupMessages = false;
+    this.popupDescription = !this.popupDescription;
   }
 
   messagesSumit() {

@@ -28,15 +28,18 @@
           <div class="d-flex justify-content-around">
             <div>
               <h1>{{vsItem.team1}}</h1>
+              <h1 *ngIf="vsItem.team1_final_Score">{{vsItem.team1_final_Score}}</h1>
               <h1>{{vsItem.team1_winRate}}</h1>
             </div>
             <div>
               <h1 class="text-center">ＶＳ</h1>
+              <h1 class="text-center" *ngIf="vsItem.team1_final_Score">比分</h1>
               <button class="btn btn-info mt-2" (click)="analysisBtn(team.teamId, vsItem)"
-                [disabled]="!isLogin || vsItem.win">此場勝率預測</button>
+                [disabled]="!isLogin || vsItem.team1_winRate">此場勝率預測</button>
             </div>
             <div>
               <h1>{{vsItem.team2}}</h1>
+              <h1 *ngIf="vsItem.team2_final_Score">{{vsItem.team2_final_Score}}</h1>
               <h1>{{vsItem.team2_winRate}}</h1>
             </div>
           </div>
@@ -52,6 +55,22 @@
           <button type="button" class="btn btn-warning btn-sm" (click)="logout()" *ngIf="isLogin">登出</button>
           <button type="button" class="btn btn-primary btn-sm" (click)="messages()" [disabled]="!isLogin"
             title="登入後才可以留言">留言</button>
+          <button type="button" class="btn btn-info btn-sm" title="點擊看說明" (click)="description()">說明<i
+              class="fas fa-exclamation-circle"></i>
+          </button>
+        </div>
+      </div>
+
+      <div *ngIf="popupDescription">
+        <div class="card border-primary mb-3">
+          <div class="card-header">說明</div>
+          <div class="card-body">
+            <div>一般會員享有每個月三次的免費預測次數，若想增加次數，$30/次，<a
+                href="https://www.facebook.com/%E8%B3%BD%E4%BA%8B%E5%88%86%E6%9E%90%E5%90%8C%E5%AD%B8%E6%9C%83-100334865120067">
+                請私訊粉專客服
+              </a>
+            </div>
+          </div>
         </div>
       </div>
 
@@ -60,10 +79,12 @@
           <div class="card-header">登入</div>
           <div class="card-body text-primary">
             <h5 class="card-title">帳號
-              <input type="text" class="form-control" placeholder="請輸入帳號" [(ngModel)]="account" (keyup.enter)="loginBtn()">
+              <input type="text" class="form-control" placeholder="請輸入帳號" [(ngModel)]="account"
+                (keyup.enter)="loginBtn()">
             </h5>
             <h5 class="card-title">密碼
-              <input type="password" class="form-control" placeholder="請輸入密碼" [(ngModel)]="password" (keyup.enter)="loginBtn()">
+              <input type="password" class="form-control" placeholder="請輸入密碼" [(ngModel)]="password"
+                (keyup.enter)="loginBtn()">
             </h5>
           </div>
           <div class="d-flex btn_group">
@@ -117,7 +138,8 @@
                     {{replyItem.author}}
                   </div>
                   <div *ngIf="tokenContain.account === replyItem.author">
-                    <button type="button" class="btn btn-danger btn-sm" (click)="deleteReply(replyItem, messageItem)">刪除</button>
+                    <button type="button" class="btn btn-danger btn-sm"
+                      (click)="deleteReply(replyItem, messageItem)">刪除</button>
                   </div>
                 </h5>
                 <p class="card-text mb-0">{{replyItem.content}}</p>
