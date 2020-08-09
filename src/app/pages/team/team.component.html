@@ -48,7 +48,7 @@
 
       <div class="alert alert-dark d-flex justify-content-between" role="alert">
         <div class="message_text">
-          討論區 ｜ 會員人數： 20245 ｜ 會員名稱： {{tokenContain.account}} ｜ 剩餘預測次數：{{counts}}
+          討論區 ｜ 會員人數： {{members + 123}} ｜ 會員名稱： {{tokenContain.account}} ｜ 剩餘預測次數：{{counts}}
         </div>
         <div>
           <button type="button" class="btn btn-warning btn-sm" (click)="login()" *ngIf="!isLogin">登入</button>

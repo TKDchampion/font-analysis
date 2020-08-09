@@ -29,6 +29,7 @@ export class TeamComponent implements OnInit {
   team: any;
   replyText: string;
   counts = 0;
+  members = 0;
 
   constructor(
     private router: Router,
@@ -39,6 +40,7 @@ export class TeamComponent implements OnInit {
     private spinner: NgxSpinnerService
   ) {
     this.teamId = this.route.snapshot.paramMap.get('id');
+    this.getUserMembers();
   }
 
   ngOnInit() {
@@ -63,6 +65,10 @@ export class TeamComponent implements OnInit {
     });
   }
 
+  getUserMembers() {
+    this.pagesService.getUserMembers().subscribe((resp: any) => this.members = resp.length);
+  }
+
   goBack() {
     this.router.navigateByUrl('/pages');
   }
@@ -81,6 +87,7 @@ export class TeamComponent implements OnInit {
     };
     this.pagesService.singin(obj).subscribe((resp: TokenInfo) => {
       alert('註冊成功');
+      this.getUserMembers();
       this.spinner.hide();
     }, error => {
       alert('註冊失敗');
@@ -105,6 +112,7 @@ export class TeamComponent implements OnInit {
         this.storage.set(this.option.key, resp);
         this.popupLogin = false;
         this.isLogin = true;
+        this.getUserMembers();
         this.tokenContain = this.storage.get('token');
       } else {
         alert('登入失敗');

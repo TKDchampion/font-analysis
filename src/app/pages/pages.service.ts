@@ -33,6 +33,10 @@ export class PagesService extends BaseService {
     });
   }
 
+  getUserMembers() {
+    return this.get('v1/getUserMembers');
+  }
+
   login(obj: object) {
     return this.post('v1/login', {
       body: obj
